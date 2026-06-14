@@ -1,2 +1,4 @@
-# Test
-pytest
+# Runtime dependencies.
+# This project uses only the Python standard library (argparse, sys),
+# so there are no third-party runtime requirements.
+# Test/dev tooling lives in requirements-dev.txt.
