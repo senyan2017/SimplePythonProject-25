@@ -1,10 +1,10 @@
-FROM python:3.8
+FROM python:3.11-slim
 
-# 현재 위치에 있는 모든 파일을 복사합니다.
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
 COPY . .
 
-# 설치해야하는 라이브러리들을 설치해줍니다.
-RUN pip install -r requirements.txt
-
-# Python을 실행합니다.
-ENTRYPOINT [ "python", "main.py" ]
+ENTRYPOINT ["python", "main.py"]
