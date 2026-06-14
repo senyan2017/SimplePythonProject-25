@@ -1,10 +1,16 @@
-FROM python:3.8
+FROM python:3.11-slim
 
-# 현재 위치에 있는 모든 파일을 복사합니다.
-COPY . .
+WORKDIR /app
 
-# 설치해야하는 라이브러리들을 설치해줍니다.
-RUN pip install -r requirements.txt
+# Install dependencies first (leverage Docker layer cache)
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Python을 실행합니다.
-ENTRYPOINT [ "python", "main.py" ]
+# Copy application code
+COPY greeter/ greeter/
+COPY main.py .
+
+# ENTRYPOINT keeps the binary fixed; CMD provides default args that
+# users can override at `docker run` time.
+ENTRYPOINT ["python", "main.py"]
+CMD []
