@@ -1,2 +1,2 @@
 # Test
-pytest
+pytest>=7.0
